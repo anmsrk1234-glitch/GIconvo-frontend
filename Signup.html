@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup-Telser AI</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #171818;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      }
+    .signup-container {
+      background: #171818;
+      padding: 1rem;
+      border-radius: 15px;
+      width: 70%;
+      max-width: 400px;
+      height: 68%;
+      max-height: 900px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+   h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+   .form-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: flex;
+      margin-bottom: 0.1rem;
+      font-size: 0.9rem;
+    }
+    input {
+      width: 90%;
+      padding: 1rem;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      background: #0d1117;
+      color: #fff;
+      font-size: 1rem;
+      height: 15px;
+    }
+    input:focus {
+      outline: none;
+      border-color: #58a6ff;
+    }
+    button {
+      width: 100%;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 8px;
+      background: #58a6ff;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    button:hover {
+      background: #1f6feb;
+    }
+   .login-link {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .login-link a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+    <div class="signup-container">
+    <h2>Create your account</h2>
+    <form id="signupForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter your username" required>
+      </div>
+      <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+     <div class="form-group">
+     <label for="password">Password</label>
+     <input type="password" id="password" placeholder="Enter a strong password" required>
+      </div>
+     <button type="submit">Sign Up</button>
+    </form>
+    <div class="login-link">
+      Already have an account? <a href="login.html">Log in</a>
+    </div>
+  </div>
+  <script>
+    const form = document.getElementById("signupForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+  const data = {
+     username: document.getElementById("username").value,
+     email: document.getElementById("email").value,
+     password: document.getElementById("password").value
+      };
+    try {
+    const response = await fetch("http://127.0.0.1:8000/signup", {
+     method: "POST",
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify(data)
+        });
+
+    const result = await response.json();
+    if (response.ok) {
+    alert("Signup successful! You can now log in.");
+    window.location.href = "login.html"; // redirect
+    } else {
+      alert(result.detail || "Signup failed");
+        }
+      } catch (error) {
+        alert("Error connecting to server");
+      }
+    });
+  </script>
+ </body>
+</html>

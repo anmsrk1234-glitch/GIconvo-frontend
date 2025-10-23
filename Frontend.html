@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <!-- ✅ Basic SEO -->
+  <title>GIconvo - Your Smart AI Chat Companion</title>
+  <meta name="description" content="GIconvo is an AI-powered chatbot platform that helps you converse, learn, and create. Built with FastAPI and OpenAI.">
+ <meta name="keywords" content="GIconvo, AI chatbot, AI assistant, AI companion, OpenAI chatbot, FastAPI, conversational AI, GPT chatbot, smart assistant, virtual assistant, personal AI, generative AI, AI website, AI chat platform, futuristic chatbot, intelligent chat system, AI-powered app, OpenAI integration, AI conversation tool, Aman Sarkar">
+ <meta name="author" content="Aman Sarkar">
+  <!-- ✅ Social Media (Open Graph) -->
+  <meta property="og:title" content="GIconvo - AI Chat Companion">
+  <meta property="og:description" content="An intelligent AI chatbot built with FastAPI and OpenAI. Try now!">
+  <meta property="og:image" content="https://giconvo.com/preview.jpg">
+  <meta property="og:url" content="https://giconvo.com">
+  <meta property="og:type" content="website">
+  <!-- ✅ Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GIconvo - AI Chat Companion">
+  <meta name="twitter:description" content="Chat with GIconvo – the AI that learns from you.">
+  <meta name="twitter:image" content="https://yourdomain.com/preview.jpg">
+  <!-- ✅ Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+   <!-- Import Orbitron from Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+ <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+   body {
+     background: 
+    radial-gradient(circle at center, #66b3ff 0%, #081830 50%, #000000 100%),
+    linear-gradient(135deg, #02040c, #0a1830, #061a3d);
+    background-blend-mode: overlay;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* center content vertically */
+    height: 100vh;
+    color: white;
+    }
+    .top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 25px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    /* Menu Button */
+    .menu-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      padding: 10px 15px;
+      font-size: 17px;
+      border: none;
+      background: #111;
+      color: white;
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .menu-btn:hover {
+      background:#00c9ff;
+      color:#000;
+    }
+     /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #222;
+      color: white;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 1000;
+    }
+    .sidebar a {
+      display: block;
+      padding: 12px 20px;
+      color: white;
+      text-decoration: none;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .sidebar a:hover { background: #575757; }
+    .sidebar h2 { padding-left: 20px; }
+    .sidebar.open { width: 250px; }
+    
+    .sign-in {
+      font-size: 14px;
+      cursor: pointer;
+      color: #ddd;
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+     background: #111;
+     }
+    .sign-in:hover { background: #00c9ff; color: #000; }
+    .title {
+      margin-top: 17px;
+      font-size: 25px;
+      letter-spacing: 3px;
+      font-weight: 470;
+      font-family: 'Orbitron', sans-serif;
+      color: #f5f5f5;
+      text-transform: uppercase;
+    }
+    /* Search Box */
+    .search-box {
+      position:relative;
+      width: 75%;
+      max-width: 500px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid #ccc;
+      border-radius: 23px;
+      height: 45px;
+      padding: 5px 10px;
+      background: linear-gradient(135deg, #1c1f26, #0a0f1c); /* dark gradient */
+      color: #e0e0e0; /* text color */
+      margin-top: 20px ;
+    /* Add shadow */
+   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); /* Subtle black shadow with moderate blur */
+    }
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      height: 100%;
+      padding-left: 40px;
+      background: transparent;  
+      color: #fff; /* text color white */
+    }
+    .search-box button {
+      background: #0078ff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 5px 12px;
+      cursor: pointer;
+    }
+    .search-box button:hover { background:#005bb5; }
+    /* Chat Interface */
+    .chat-container {
+      position:relative;
+      width: 90%;
+      max-width: 600px;
+      height: 70vh;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      display: none; /* hidden initially */
+      flex-direction: column;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+    .chat-box {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #061a3d;
+     }
+      .user-message, .bot-message {
+      padding: 10px 14px;
+      border-radius: 12px;
+      max-width: 75%;
+    }
+    .user-message {
+      background: #0078ff;
+      color: #fff;
+      align-self: flex-end;
+    }
+    .bot-message {
+      background: #333;
+      color: #fff;
+      align-self: flex-start;
+    }
+    .chat-input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      border-top: 1px solid #333;
+      background: #111;
+    }
+    .chat-input input {
+      flex: 1;
+      width: 70%;
+      max-width: 508px;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+    .chat-input button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 30%;
+      background: #0078ff;
+      color: white;
+      cursor: pointer;
+      width:35px;
+      height: 31px;
+    }
+    .chat-input button:hover { background: #005bb5; }
+    .action-btn {
+      position: absolute;
+      background: #00c9ff;
+      left: 10px;
+      border: none;
+      color: #000;
+      width: 33px;
+      height: 31px;
+      padding: 3px;
+      margin: 0 -6px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .action-btn:hover {
+      background: #009ec7;
+      color: #fff;
+    }
+    .chat-send-button {
+      position: absolute;
+      right: 5px;
+      background: #0084ff;
+      border: none;
+      border-radius: 30%;
+      width: 35px;
+      height: 31px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      color: white;
+      font-size: 12px;
+    }
+    </style>
+  </head>
+<body>
+   <!-- Menu Button -->
+  <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
+  <!-- Top bar -->
+<div class="top-bar">
+  <i class="fas fa-cog settings-icon"></i>
+  <a href="signup.html" class="sign-in">Sign in</a>
+</div>
+    <!-- Title -->
+  <div class="title">how can i help you today</div>
+    <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <h2>Menu</h2>
+    <a href="#" onclick="newChat()">New Chat</a>
+    <a href="#">Profile</a>
+    <a href="about.html">About</a>
+    <a href="#">History</a>
+    <a href="contact.html">Contact</a>
+  </div>
+     <!-- Search Box -->
+  <div id="searchBox" class="search-box">
+    <input type="text" id="first-input" placeholder="Ask anything..." />
+    <button onclick="startChat()" class="send-button">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+    <button class="action-btn" onclick="document.getElementById('fileInput').click()">
+      <i class="fas fa-paperclip"></i>
+      <input type="file" id="fileInput" style="display:none;">
+    </button>
+  </div>
+    <!-- Chat Interface -->
+  <div id="chatContainer" class="chat-container">
+    <div id="chatBox" class="chat-box"></div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Ask anything..." />
+      <button onclick="sendMessage()" class="chat-send-button">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+      <button class="action-btn" onclick="document.getElementById('fileInput').click()">
+        <i class="fas fa-paperclip"></i>
+      </button>
+    </div>
+  </div>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("open");
+    }
+    // Start the chat when the user clicks "Start"
+async function startChat() {
+    const input = document.getElementById("first-input");
+    const message = input.value.trim();
+    if (!message) return;
+
+    // Hide the search box and show chat container
+    document.getElementById("searchBox").style.display = "none";
+    document.getElementById("chatContainer").style.display = "flex";
+
+    // Show user's first message
+    addMessage(message, "user");
+    input.value = "";
+
+    // Call backend API for the bot's greeting/response
+    try {
+        const response = await fetch("http://localhost:8000/ask", {  // replace with your deployed backend URL
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: message })
+        });
+        const data = await response.json();
+        addMessage("🤖 " + data.answer, "bot");
+    } catch (err) {
+        console.error(err);
+        addMessage("⚠️ Error connecting to AI.", "bot");
+    }
+}
+
+// Send message when user types in chat input
+async function sendMessage() {
+    const input = document.getElementById("user-input");
+    const message = input.value.trim();
+    if (!message) return;
+
+    // Show user's message
+    addMessage(message, "user");
+    input.value = "";
+
+    // Call backend API to get AI response
+    try {
+        const response = await fetch("http://localhost:8000/ask", {  // replace with your deployed backend URL
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: message })
+        });
+        const data = await response.json();
+        addMessage("🤖 " + data.answer, "bot");
+    } catch (err) {
+        console.error(err);
+        addMessage("⚠️ Error connecting to AI.", "bot");
+    }
+}
+
+// Helper function to add messages to chat
+function addMessage(text, sender) {
+    const chatBox = document.getElementById("chatBox");
+    const msg = document.createElement("div");
+    msg.className = sender === "user" ? "user-message" : "bot-message";
+    msg.innerText = text;
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+    function newChat() {
+      document.getElementById("chatBox").innerHTML = "";
+      document.getElementById("chatContainer").style.display = "none";
+      document.getElementById("searchBox").style.display = "flex";
+      document.getElementById("first-input").value = "";
+    }
+    </script>
+  </body>
+</html>
