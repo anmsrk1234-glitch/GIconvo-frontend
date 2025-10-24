@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <!-- Marked library for Markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- DOMPurify for safe HTML -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.1/dist/purify.min.js"></script>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VEP9MNMC8H"></script>
   <script>
@@ -375,10 +380,15 @@ function addMessage(text, sender) {
     const chatBox = document.getElementById("chatBox");
     const msg = document.createElement("div");
     msg.className = sender === "user" ? "user-message" : "bot-message";
-    msg.innerText = text;
+
+    // Markdown rendering
+    const html = marked.parse(text);
+    msg.innerHTML = DOMPurify.sanitize(html);
+
     chatBox.appendChild(msg);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
+
 
     function newChat() {
       document.getElementById("chatBox").innerHTML = "";
