@@ -443,7 +443,9 @@ function addMessage(text, sender) {
             body: JSON.stringify({ prompt: message })
         });
         const data = await response.json();
-
+        // Ensure typing is visible at least 500ms
+        await new Promise(resolve => setTimeout(resolve, 500)); 
+        
         // Remove typing animation
         typingIndicator.remove();
 
