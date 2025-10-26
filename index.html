@@ -284,17 +284,6 @@
       color: white;
       font-size: 12px;
     }
-     .typing {
-      font-style: italic;
-      opacity: 0.8;
-     animation: blink 1s infinite;
-    }
-
-   @keyframes blink {
-   0%, 100% { opacity: 0.8; }
-   50% { opacity: 0.3; }
-}
-
 
     </style>
   </head>
@@ -421,41 +410,6 @@ function addMessage(text, sender) {
       document.getElementById("searchBox").style.display = "flex";
       document.getElementById("first-input").value = "";
     }
-
-    async function sendMessage() {
-    const inputBox = document.getElementById("user-input");
-    const message = inputBox.value.trim();
-    if (!message) return; // do nothing if empty
-
-    addMessage(message, "user");
-    inputBox.value = ""; // clear input
-
-    // Show typing animation
-    const typingIndicator = document.createElement("div");
-    typingIndicator.className = "bot-message typing";
-    typingIndicator.textContent = "🤖 Bot is typing...";
-    document.querySelector("#chatBox").appendChild(typingIndicator);
-
-    try {
-        const response = await fetch("https://giconvo-backend.onrender.com/ask", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt: message })
-        });
-        const data = await response.json();
-        // Ensure typing is visible at least 500ms
-        await new Promise(resolve => setTimeout(resolve, 500)); 
-        
-        // Remove typing animation
-        typingIndicator.remove();
-
-        // Add bot response
-        addMessage("🤖 " + data.answer, "bot");
-    } catch (error) {
-        typingIndicator.remove();
-        addMessage("⚠️ Error connecting to AI", "bot");
-    }
-}
 
     </script>
   </body>
