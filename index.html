@@ -429,7 +429,7 @@ function addMessage(text, sender) {
     const typingIndicator = document.createElement("div");
     typingIndicator.className = "bot-message typing";
     typingIndicator.textContent = "🤖 Bot is typing...";
-    document.querySelector("#chat-box").appendChild(typingIndicator);
+    document.querySelector("chatBox").appendChild(typingIndicator);
 
     try {
     const response = await fetch("https://giconvo-backend.onrender.com/ask", {
