@@ -192,19 +192,32 @@
      }
       .user-message, .bot-message {
       padding: 10px 14px;
-      border-radius: 12px;
-      max-width: 75%;
+      margin-bottom: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      max-width: 75%; /* keep user bubble smaller */
     }
-    .user-message {
-      background: #0078ff;
-      color: #fff;
+
+      /* ✅ User message: keep blue bubble */
+      .user-message {
+       background: #0078ff;
+       color: #fff;
       align-self: flex-end;
+      border-radius: 12px;
     }
-    .bot-message {
-      background: #333;
-      color: #fff;
-      align-self: flex-start;
-    }
+
+      /* ✅ Bot message: remove bubble completely */
+     .bot-message {
+     color: #1f2937;
+     background: none;       /* remove gray bubble */
+     border-radius: 0;       /* no rounded edges */
+     max-width: 100%;        /* take full width */
+     padding: 0;             /* remove padding for plain text look */
+     align-self: flex-start;
+     font-family: "Inter", sans-serif;
+    text-align: left;
+   }
+
     .chat-input {
       display: flex;
       align-items: center;
