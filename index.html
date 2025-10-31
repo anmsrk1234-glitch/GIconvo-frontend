@@ -1,416 +1,388 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
-   <!-- Marked library for Markdown -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <!-- DOMPurify for safe HTML -->
-  <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.1/dist/purify.min.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VEP9MNMC8H"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VEP9MNMC8H"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-VEP9MNMC8H');
- </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow">
-  <!-- ✅ Basic SEO -->
-  <title>GIconvo - Your Smart AI Chat Companion</title>
-  <meta name="description" content="GIconvo is an AI-powered chatbot platform that helps you converse, learn, and create. Built with FastAPI and OpenAI.">
- <meta name="keywords" content="GIconvo, AI chatbot, AI assistant, AI companion, OpenAI chatbot, FastAPI, conversational AI, GPT chatbot, smart assistant, virtual assistant, personal AI, generative AI, AI website, AI chat platform, futuristic chatbot, intelligent chat system, AI-powered app, OpenAI integration, AI conversation tool, Aman Sarkar">
- <meta name="author" content="Aman Sarkar">
-  <!-- ✅ Social Media (Open Graph) -->
-  <meta property="og:title" content="GIconvo - AI Chat Companion">
-  <meta property="og:description" content="An intelligent AI chatbot built with FastAPI and OpenAI. Try now!">
-  <meta property="og:image" content="https://giconvo.com/preview.jpg">
-  <meta property="og:url" content="https://giconvo.com">
-  <meta property="og:type" content="website">
-  <!-- ✅ Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GIconvo - AI Chat Companion">
-  <meta name="twitter:description" content="Chat with GIconvo – the AI that learns from you.">
-  <meta name="twitter:image" content="https://yourdomain.com/preview.jpg">
-  <!-- ✅ Favicon -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-   <!-- Import Orbitron from Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
- <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-   body {
-     background: 
-    radial-gradient(circle at center, #66b3ff 0%, #081830 50%, #000000 100%),
-    linear-gradient(135deg, #02040c, #0a1830, #061a3d);
-    background-blend-mode: overlay;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* center content vertically */
-    height: 100vh;
-    color: white;
-    }
-    .top-bar {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 25px;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    /* Menu Button */
-    .menu-btn {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      padding: 10px 15px;
-      font-size: 17px;
-      border: none;
-      background: #111;
-      color: white;
-      border-radius: 12px;
-      cursor: pointer;
-      z-index: 1001;
-    }
-    .menu-btn:hover {
-      background:#00c9ff;
-      color:#000;
-    }
-     /* Sidebar */
-    .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: #222;
-      color: white;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
-      z-index: 1000;
-    }
-    .sidebar a {
-      display: block;
-      padding: 12px 20px;
-      color: white;
-      text-decoration: none;
-      transition: 0.2s;
-      cursor: pointer;
-    }
-    .sidebar a:hover { background: #575757; }
-    .sidebar h2 { padding-left: 20px; }
-    .sidebar.open { width: 250px; }
-    
-    .sign-in {
-      font-size: 14px;
-      cursor: pointer;
-      color: #ddd;
-      padding: 6px 14px;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 20px;
-     background: #111;
-     }
-    .sign-in:hover { background: #00c9ff; color: #000; }
-    .title {
-      margin-top: 17px;
-      font-size: 20px;
-      letter-spacing: 2px;
-      font-weight: 450;
-      font-family: 'Orbitron', sans-serif;
-      color: #f5f5f5;
-      text-transform: uppercase;
-    }
-    /* Search Box */
-    .search-box {
-      position:relative;
-      width: 75%;
-      max-width: 500px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      border: 1px solid #ccc;
-      border-radius: 23px;
-      height: 45px;
-      padding: 5px 10px;
-      background: linear-gradient(135deg, #1c1f26, #0a0f1c); /* dark gradient */
-      color: #e0e0e0; /* text color */
-      margin-top: 20px ;
-    /* Add shadow */
-   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); /* Subtle black shadow with moderate blur */
-    }
-    .search-box input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      height: 100%;
-      padding-left: 40px;
-      background: transparent;  
-      color: #fff; /* text color white */
-    }
-    .search-box button {
-      background: #0078ff;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      padding: 5px 12px;
-      cursor: pointer;
-    }
-    .search-box button:hover { background:#005bb5; }
-    /* Chat Interface */
-    .chat-container {
-      position:relative;
-      width: 90%;
-      max-width: 600px;
-      height: 70vh;
-      background: #111;
-      border: 1px solid #333;
-      border-radius: 12px;
-      display: none; /* hidden initially */
-      flex-direction: column;
-      margin-top: 20px;
-      overflow: hidden;
-    }
-    .chat-box {
-      flex: 1;
-      padding: 15px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: #061a3d;
-     }
-      .user-message, .bot-message {
-      padding: 10px 14px;
-      margin-bottom: 12px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      max-width: 75%; /* keep user bubble smaller */
-    }
-
-      /* ✅ User message: keep blue bubble */
-      .user-message {
-       background: #0078ff;
-       color: #fff;
-      align-self: flex-end;
-      border-radius: 12px;
-    }
-
-      /* ✅ Bot message: remove bubble completely */
-     .bot-message {
-     color: #e8ebf0;
-     background: none;       /* remove gray bubble */
-     border-radius: 0;       /* no rounded edges */
-     max-width: 100%;        /* take full width */
-     padding: 0;             /* remove padding for plain text look */
-     align-self: flex-start;
-     font-family: "Inter", sans-serif;
-    text-align: left;
-   }
-
-    .chat-input {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 10px;
-      border-top: 1px solid #333;
-      background: #111;
-    }
-    .chat-input input {
-      flex: 1;
-      width: 50%;
-      max-width: 508px;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      outline: none;
-      font-size: 14px;
-    }
-    .chat-input button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 30%;
-      background: #0078ff;
-      color: white;
-      cursor: pointer;
-      width:35px;
-      height: 31px;
-    }
-    .chat-input button:hover { background: #005bb5; }
-    .action-btn {
-      position: absolute;
-      background: #00c9ff;
-      left: 10px;
-      border: none;
-      color: #000;
-      width: 33px;
-      height: 31px;
-      padding: 3px;
-      margin: 0 -6px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .action-btn:hover {
-      background: #009ec7;
-      color: #fff;
-    }
-    .chat-send-button {
-      position: absolute;
-      right: 5px;
-      background: #0084ff;
-      border: none;
-      border-radius: 30%;
-      width: 35px;
-      height: 31px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      color: white;
-      font-size: 12px;
-    }
-
-    </style>
-  </head>
-<body>
-   <!-- Menu Button -->
-  <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
-  <!-- Top bar -->
-<div class="top-bar">
-  <i class="fas fa-cog settings-icon"></i>
-  <a href="signup.html" class="sign-in">Sign in</a>
-</div>
-    <!-- Title -->
-  <div class="title">how can i help you today</div>
-    <!-- Sidebar -->
-  <div id="sidebar" class="sidebar">
-    <h2>Menu</h2>
-    <a href="#" onclick="newChat()">New Chat</a>
-    <a href="#">Profile</a>
-    <a href="about.html">About</a>
-    <a href="#">History</a>
-    <a href="contact.html">Contact</a>
-  </div>
-     <!-- Search Box -->
-  <div id="searchBox" class="search-box">
-    <input type="text" id="first-input" placeholder="Ask anything..." />
-    <button onclick="startChat()" class="send-button">
-      <i class="fas fa-paper-plane"></i>
-    </button>
-    <button class="action-btn" onclick="document.getElementById('fileInput').click()">
-      <i class="fas fa-paperclip"></i>
-      <input type="file" id="fileInput" style="display:none;">
-    </button>
-  </div>
-    <!-- Chat Interface -->
-  <div id="chatContainer" class="chat-container">
-    <div id="chatBox" class="chat-box"></div>
-    <div class="chat-input">
-      <input type="text" id="user-input" placeholder="Ask anything..." />
-      <button onclick="sendMessage()" class="chat-send-button">
-        <i class="fas fa-paper-plane"></i>
-      </button>
-      <button class="action-btn" onclick="document.getElementById('fileInput').click()">
-        <i class="fas fa-paperclip"></i>
-      </button>
-    </div>
-  </div>
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("open");
-    }
-    // Start the chat when the user clicks "Start"
-async function startChat() {
-    const input = document.getElementById("first-input");
-    const message = input.value.trim();
-    if (!message) return;
-
-    // Hide the search box and show chat container
-    document.getElementById("searchBox").style.display = "none";
-    document.getElementById("chatContainer").style.display = "flex";
-
-    // Show user's first message
-    addMessage(message, "user");
-    input.value = "";
-
-    // Call backend API for the bot's greeting/response
-    try {
-        const response = await fetch("https://giconvo-backend.onrender.com/ask", {  // replace with your deployed backend URL
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt: message })
-        });
-        const data = await response.json();
-        addMessage("🤖 " + data.answer, "bot");
-    } catch (err) {
-        console.error(err);
-        addMessage("⚠️ Error connecting to AI.", "bot");
-    }
-}
-
-// Send message when user types in chat input
-async function sendMessage() {
-    const input = document.getElementById("user-input");
-    const message = input.value.trim();
-    if (!message) return;
-
-    // Show user's message
-    addMessage(message, "user");
-    input.value = "";
-
-    // Call backend API to get AI response
-    try {
-        const response = await fetch("https://giconvo-backend.onrender.com/ask", {  // replace with your deployed backend URL
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt: message })
-        });
-        const data = await response.json();
-        addMessage("🤖 " + data.answer, "bot");
-    } catch (err) {
-        console.error(err);
-        addMessage("⚠️ Error connecting to AI.", "bot");
-    }
-}
-
-// Helper function to add messages to chat
-function addMessage(text, sender) {
-    const chatBox = document.getElementById("chatBox");
-    const msg = document.createElement("div");
-    msg.className = sender === "user" ? "user-message" : "bot-message";
-
-    // Markdown rendering
-    const html = marked.parse(text);
-    msg.innerHTML = DOMPurify.sanitize(html);
-
-    chatBox.appendChild(msg);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-
-    function newChat() {
-      document.getElementById("chatBox").innerHTML = "";
-      document.getElementById("chatContainer").style.display = "none";
-      document.getElementById("searchBox").style.display = "flex";
-      document.getElementById("first-input").value = "";
-    }
-
+    gtag('config', 'G-VEP9MNMC8H');
     </script>
-  </body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <!-- ✅ Basic SEO -->
+    <title>GIconvo - Intelligent Conversations</title>
+    <meta name="description" content="GIconvo is an AI-powered chatbot platform that helps you converse, learn, and create. Built with FastAPI and OpenAI.">
+    <meta name="keywords" content="GIconvo, AI chatbot, AI assistant, AI companion, OpenAI chatbot, FastAPI, conversational AI, GPT chatbot, smart assistant, virtual assistant, personal AI, generative AI, AI website, AI chat platform, futuristic chatbot, intelligent chat system, AI-powered app, OpenAI integration, AI conversation tool, Aman Sarkar">
+    <meta name="author" content="Aman Sarkar">
+    <!-- ✅ Social Media (Open Graph) -->
+    <meta property="og:title" content="GIconvo - AI Chat Companion">
+    <meta property="og:description" content="An intelligent AI chatbot built with FastAPI and OpenAI. Try now!">
+    <meta property="og:image" content="https://giconvo.com/preview.jpg">
+    <meta property="og:url" content="https://giconvo.com">
+    <meta property="og:type" content="website">
+     <!-- ✅ Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GIconvo - AI Chat Companion">
+    <meta name="twitter:description" content="Chat with GIconvo – the AI that learns from you.">
+     <meta name="twitter:image" content="https://yourdomain.com/preview.jpg">
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: 
+            radial-gradient(circle at center, #66b3ff 0%, #081830 50%, #000000 100%),
+            linear-gradient(135deg, #02040c, #0a1830, #061a3d);
+            background-blend-mode: overlay;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "🤖";
+            font-size: 32px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #667eea;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+            animation: fadeIn 0.6s ease-out backwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 40px; }
+            .subtitle { font-size: 18px; }
+            .nav-links { display: none; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">GIconvo</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Talk. Think. Create — with GiConvo</h1>
+                <p class="subtitle">Experience the future of intelligent chat with our advanced AI-powered assistant</p>
+                <div class="cta-buttons">
+                    <a href="main_ui.html" class="btn btn-primary">Start your first conversation now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our AI Chatbot?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast Responses</h3>
+                    <p>Get instant answers powered by cutting-edge AI technology. No more waiting for slow, generic responses.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Context-Aware Intelligence</h3>
+                    <p>Our AI understands context and remembers your conversation, providing personalized and relevant responses every time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>Your conversations are encrypted and secure. We prioritize your privacy and never share your data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Conversations?</h2>
+            <button class="btn btn-primary">Get Started Now</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 AI Chatbot. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
 </html>
