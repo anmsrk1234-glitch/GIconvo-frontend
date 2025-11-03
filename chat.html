@@ -22,7 +22,10 @@
 
   <style>
     body {
-      background: radial-gradient(circle at center, #66b3ff 0%, #081830 50%, #000000 100%);
+      background: 
+        radial-gradient(circle at center, #66b3ff 0%, #081830 50%, #000000 100%),
+        linear-gradient(135deg, #02040c, #0a1830, #061a3d);
+      background-blend-mode: overlay;
       font-family: Arial, sans-serif;
       color: white;
       display: flex;
@@ -56,9 +59,9 @@
 
     .user-message, .bot-message {
       margin-bottom: 12px;
-      line-height: 1.6;
-      white-space: pre-wrap;
+      line-height: 0.2;
       max-width: 75%;
+      white-space: normal;
     }
 
     .user-message {
@@ -67,6 +70,8 @@
       align-self: flex-end;
       border-radius: 12px;
       padding: 10px 14px;
+      white-space: normal;
+  display: inline-block;
     }
 
     .bot-message {
