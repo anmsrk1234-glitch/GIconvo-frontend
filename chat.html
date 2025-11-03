@@ -37,15 +37,21 @@
     }
 
     .chat-container {
-      width: 90%;
+      width: 92%;
       max-width: 600px;
-      height: 80dvh;
+      height: 90dvh;
       background: #111;
       border-radius: 12px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
     }
+    @media (max-width: 768px) {
+    .chat-container {
+    width: 100%;
+    border-radius: 0;
+    }
+  }
 
     .chat-box {
   flex: 1;
