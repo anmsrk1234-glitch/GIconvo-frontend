@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog | Latest Articles, Guides & Updates</title>
+  <meta name="description" content="Insights, stories, and practical guides from the Giconvo team about AI, design, business and the web."/>
+  <link rel="canonical" href="https://www.giconvo.com/blog/"/>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Giconvo Blog — Latest Articles" />
+  <meta property="og:description" content="Insights, stories, and practical guides from our team." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.giconvo.com/blog/" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Giconvo Blog — Latest Articles" />
+  <meta name="twitter:description" content="Insights, stories, and practical guides from our team." />
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      min-height: 100vh; padding: 60px 20px;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    .container { max-width:1200px; margin:0 auto; }
+
+    header.blog-header { text-align:center; margin-bottom:60px; animation:fadeInDown .8s ease; color:#fff; }
+    header.blog-header h1 { font-size:3rem; margin-bottom:10px; text-shadow:2px 2px 4px rgba(0,0,0,.2); }
+    header.blog-header p { font-size:1.2rem; color:rgba(255,255,255,.9); }
+
+    .blog-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+      gap:30px; margin-bottom:40px;
+    }
+    article.blog-card {
+      background:#fff; border-radius:16px; overflow:hidden; cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      transition: transform .3s ease, box-shadow .3s ease;
+      animation:fadeInUp .8s ease;
+    }
+    article.blog-card:hover { transform:translateY(-10px); box-shadow:0 20px 40px rgba(0,0,0,.3); }
+
+    .thumb {
+      width:100%; height:220px; display:block; object-fit:cover;
+      background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    }
+    .content { padding:24px; }
+    .category {
+      display:inline-block; background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      color:#fff; padding:6px 14px; border-radius:20px; font-size:.85rem; font-weight:600;
+      margin-bottom:12px; text-transform:uppercase; letter-spacing:.5px;
+    }
+    h3.title { font-size:1.35rem; color:#2d3748; margin:8px 0 12px; line-height:1.35; }
+    p.excerpt { color:#718096; line-height:1.6; margin-bottom:16px; }
+    .meta {
+      display:flex; justify-content:space-between; align-items:center;
+      padding-top:14px; border-top:1px solid #e2e8f0; font-size:.92rem; color:#a0aec0;
+    }
+    .author { display:flex; align-items:center; gap:10px; color:#4a5568; }
+    .avatar {
+      width:32px; height:32px; border-radius:50%;
+      background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:.9rem;
+    }
+    .actions { text-align:center; margin-top:40px; }
+    .btn {
+      background:#fff; color:#667eea; border:none; padding:14px 28px; font-weight:700;
+      border-radius:30px; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,.2); transition:.3s;
+    }
+    .btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.3);
+      background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:#fff; }
+
+    @keyframes fadeInDown { from {opacity:0; transform:translateY(-30px);} to {opacity:1; transform:translateY(0);} }
+    @keyframes fadeInUp { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
+
+    @media (max-width:768px){
+      header.blog-header h1 { font-size:2rem; }
+      .blog-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="blog-header" aria-labelledby="blog-title">
+      <h1 id="blog-title">Latest Articles</h1>
+      <p>Insights, stories, and perspectives from our team</p>
+    </header>
+
+    <section class="blog-grid" id="blogGrid" aria-label="Blog posts"></section>
+
+    <div class="actions">
+      <button class="btn" id="loadMoreBtn" type="button">Load More Posts</button>
+    </div>
+  </div>
+
+  <!-- Structured data: Blog container (static) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Blog",
+    "name":"Giconvo Blog",
+    "url":"https://www.giconvo.com/blog/",
+    "description":"Insights, stories, and practical guides from the Giconvo team."
+  }
+  </script>
+
+  <script>
+    // 1) Real post data – add your actual slugs/URLs/images here
+    const blogPosts = [
+      {
+        category: "Technology",
+        title: "Top 10 Ways AI Chatbots Are Changing the Internet in 2025",
+        excerpt: "From customer support to education, here are the biggest shifts powered by conversational AI—and how to use them today.",
+        author: "Giconvo Team",
+        date: "2025-11-04",            // ISO date for <time datetime="">
+        readTime: "6 min read",
+        url: "/Frontend/blog/ai-chatbots-internet-2025.html",
+        image: "/assets/ai-2025.webp", // optional; if missing we show gradient block
+        imageAlt: "Abstract AI chatbot illustration"
+      },
+      {
+        category: "Updates",
+        title: "Hello World: Why We Started the Giconvo Blog",
+        excerpt: "What this blog is about, who it's for, and how it will help you ship AI faster—no fluff.",
+        author: "Giconvo Team",
+        date: "2025-11-04",
+        readTime: "3 min read",
+        url: "/Frontend/blog/hello-world.html",
+        image: "",                     // leave empty to use gradient placeholder
+        imageAlt: ""
+      },
+      // add more posts here…
+    ];
+
+    // 2) Progressive rendering
+    let displayed = 3;
+
+    function authorInitials(name){
+      return name.split(' ').map(n => n[0]).join('').toUpperCase();
+    }
+
+    function createCard(post){
+      const article = document.createElement('article');
+      article.className = 'blog-card';
+      article.setAttribute('itemscope','');
+      article.setAttribute('itemtype','https://schema.org/BlogPosting');
+
+      const anchor = document.createElement('a');
+      anchor.href = post.url;
+      anchor.style.textDecoration = 'none';
+      anchor.setAttribute('aria-label', post.title);
+
+      // image/placeholder
+      let media;
+      if (post.image) {
+        media = document.createElement('img');
+        media.className = 'thumb';
+        media.loading = 'lazy';
+        media.src = post.image;
+        media.alt = post.imageAlt || post.title;
+      } else {
+        media = document.createElement('div');
+        media.className = 'thumb';
+        media.setAttribute('role','img');
+        media.setAttribute('aria-label', post.title);
+      }
+
+      // content
+      const content = document.createElement('div');
+      content.className = 'content';
+
+      const cat = document.createElement('span');
+      cat.className = 'category';
+      cat.textContent = post.category;
+
+      const title = document.createElement('h3');
+      title.className = 'title';
+      title.textContent = post.title;
+      title.itemProp = 'headline';
+
+      const excerpt = document.createElement('p');
+      excerpt.className = 'excerpt';
+      excerpt.textContent = post.excerpt;
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+
+      const author = document.createElement('div');
+      author.className = 'author';
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.textContent = authorInitials(post.author);
+      const authorName = document.createElement('span');
+      authorName.textContent = post.author;
+      author.appendChild(avatar);
+      author.appendChild(authorName);
+
+      const rightMeta = document.createElement('div');
+      const t = document.createElement('time');
+      t.setAttribute('datetime', post.date);
+      // pretty date (e.g., Nov 4, 2025)
+      t.textContent = new Date(post.date).toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+      rightMeta.appendChild(t);
+      rightMeta.insertAdjacentText('beforeend', ' · ' + post.readTime);
+
+      meta.appendChild(author);
+      meta.appendChild(rightMeta);
+
+      content.appendChild(cat);
+      content.appendChild(title);
+      content.appendChild(excerpt);
+      content.appendChild(meta);
+
+      anchor.appendChild(media);
+      anchor.appendChild(content);
+      article.appendChild(anchor);
+
+      return article;
+    }
+
+    function render() {
+      const grid = document.getElementById('blogGrid');
+      grid.innerHTML = '';
+      for (let i = 0; i < Math.min(displayed, blogPosts.length); i++) {
+        grid.appendChild(createCard(blogPosts[i]));
+      }
+      // Structured data: ItemList for visible posts
+      const listLd = {
+        "@context":"https://schema.org",
+        "@type":"ItemList",
+        "itemListElement": blogPosts.slice(0, Math.min(displayed, blogPosts.length)).map((p, idx) => ({
+          "@type":"ListItem",
+          "position": idx + 1,
+          "url": (new URL(p.url, location.origin)).toString()
+        }))
+      };
+      const old = document.getElementById('ld-itemlist');
+      if (old) old.remove();
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.id = 'ld-itemlist';
+      s.textContent = JSON.stringify(listLd);
+      document.body.appendChild(s);
+    }
+
+    function loadMore() {
+      displayed += 3;
+      if (displayed >= blogPosts.length) {
+        displayed = blogPosts.length;
+        const btn = document.getElementById('loadMoreBtn');
+        btn.textContent = 'No More Posts';
+        btn.disabled = true;
+      }
+      render();
+    }
+
+    document.getElementById('loadMoreBtn').addEventListener('click', loadMore);
+    render();
+  </script>
+</body>
+</html>
