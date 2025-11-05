@@ -112,17 +112,6 @@
     // 1) Real post data – add your actual slugs/URLs/images here
     const blogPosts = [
       {
-        category: "Technology",
-        title: "Top 10 Ways AI Chatbots Are Changing the Internet in 2025",
-        excerpt: "From customer support to education, here are the biggest shifts powered by conversational AI—and how to use them today.",
-        author: "Giconvo Team",
-        date: "2025-11-04",            // ISO date for <time datetime="">
-        readTime: "6 min read",
-        url: "/blog/ai-chatbots-internet-2025.html",
-        image: "/assets/ai-2025.webp", // optional; if missing we show gradient block
-        imageAlt: "Abstract AI chatbot illustration"
-      },
-      {
         category: "Updates",
         title: "Hello World: Why We Started the Giconvo Blog",
         excerpt: "What this blog is about, who it's for, and how it will help you ship AI faster—no fluff.",
@@ -133,11 +122,35 @@
         image: "",                     // leave empty to use gradient placeholder
         imageAlt: ""
       },
+      {
+        category: "Technology",
+        title: "Top 10 Ways AI Chatbots Are Changing the Internet in 2025",
+        excerpt: "From customer support to education, here are the biggest shifts powered by conversational AI—and how to use them today.",
+        author: "Giconvo Team",
+        date: "2025-11-04",            // ISO date for <time datetime="">
+        readTime: "6 min read",
+        url: "/blog/ai-chatbots-internet-2025.html",
+        image: "/assets/ai-2025.webp", // optional; if missing we show gradient block
+        imageAlt: "Abstract AI chatbot illustration"
+      },
+      
+        {
+       category: "AI Basics",
+       title: "What Is an AI Chatbot and How Does It Work?",
+       excerpt: "Learn what AI chatbots are, how they understand human language, and how platforms like GIconvo are transforming online communication.",
+       author: "GIconvo Team",
+       date: "2025-11-05",
+       readTime: "5 min read",
+       url: "/blog/what-is-an-ai-chatbot.html",
+       image: "/assets/ai-chatbot-concept.webp",
+       imageAlt: "AI chatbot explaining concept visually"
+     },
+
       // add more posts here…
     ];
 
     // 2) Progressive rendering
-    let displayed = 3;
+    let displayed = 10;
 
     function authorInitials(name){
       return name.split(' ').map(n => n[0]).join('').toUpperCase();
