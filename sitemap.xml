@@ -8,19 +8,39 @@
   <url>
     <loc>https://www.giconvo.com/home.html</loc>
     <lastmod>2025-11-02</lastmod>
-    <priority>0.80</priority>
+    <priority>0.95</priority>
   </url>
-  <!-- Blog section -->
+  <!-- Chat Page -->
+  <url>
+    <loc>https://www.giconvo.com/chat.html</loc>
+    <lastmod>2025-11-05</lastmod>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Blog Index -->
   <url>
     <loc>https://www.giconvo.com/blog/</loc>
-    <lastmod>2025-11-04</lastmod>
-    <priority>0.80</priority>
+    <lastmod>2025-11-05</lastmod>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://www.giconvo.com/blog/ai-chatbots-internet-2025.html</loc>
+    <lastmod>2025-11-05</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.giconvo.com/blog/what-is-an-ai-chatbot.html</loc>
+    <lastmod>2025-11-05</lastmod>
+    <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.giconvo.com/blog/hello-world.html</loc>
     <lastmod>2025-11-04</lastmod>
-    <priority>0.70</priority>
+    <priority>0.80</priority>
   </url>
 
 </urlset>
