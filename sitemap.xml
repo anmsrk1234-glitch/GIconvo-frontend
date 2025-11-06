@@ -43,5 +43,19 @@
     <priority>0.80</priority>
   </url>
 
+  <url>
+  <loc>https://www.giconvo.com/blog/the-evolution-of-chatbots.html</loc>
+  <lastmod>2025-11-06</lastmod>
+  <priority>0.85</priority>
+</url>
+
+<url>
+  <loc>https://www.giconvo.com/blog/how-ai-chatbots-understand-human-language.html</loc>
+  <lastmod>2025-11-06</lastmod>
+  <priority>0.85</priority>
+</url>
+
+
+
 </urlset>
 
